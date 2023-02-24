@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @file plugins/importexport/medra/filter/ArticleMedraXmlFilter.inc.php
+ * @file plugins/importexport/medra/filter/ArticleMedraXmlFilter.php
  *
  * Copyright (c) 2014-2023 Simon Fraser University
  * Copyright (c) 2000-2023 John Willinsky
@@ -13,8 +13,21 @@
  * @brief Class that converts an Article as work to a O4DOI XML document.
  */
 
-import('plugins.importexport.medra.filter.O4DOIXmlFilter');
+namespace APP\plugins\generic\medra\filter;
 
+use APP\author\Author;
+use APP\core\Application;
+use APP\core\Services;
+use APP\i18n\AppLocale;
+use APP\issue\Issue;
+use APP\submission\Submission;
+use DOMDocument;
+use DOMElement;
+use PKP\core\PKPString;
+use PKP\db\DAORegistry;
+use PKP\filter\FilterGroup;
+use PKP\galley\Galley;
+use PKP\submission\GenreDAO;
 
 class ArticleMedraXmlFilter extends O4DOIXmlFilter {
 	/**
@@ -84,7 +97,7 @@ class ArticleMedraXmlFilter extends O4DOIXmlFilter {
 	/**
 	 * Create and return the article (as work or as manifestation) node.
 	 * @param $doc DOMDocument
-	 * @param $pubObject Submission|ArticleGalley
+	 * @param $pubObject Submission|Galley
 	 * @return DOMElement
 	 */
 	function createArticleNode($doc, $pubObject) {
@@ -229,7 +242,7 @@ class ArticleMedraXmlFilter extends O4DOIXmlFilter {
 	 * @param $doc DOMDocument
 	 * @param $issue Issue
 	 * @param $article Submission
-	 * @param $galley ArticleGalley
+	 * @param $galley Galley
 	 * @param $objectLocalePrecedence array
 	 * @return DOMElement
 	 */
@@ -472,7 +485,7 @@ class ArticleMedraXmlFilter extends O4DOIXmlFilter {
 	 * Append the collection node 'Collection property="crawler-based"' to the Article data node.
 	 * @param $doc DOMDocument
 	 * @param $articleNode DOMElement
-	 * @param $article Article
+	 * @param $article Submission
 	 * @param $galleys array of galleys
 	 */
 	function appendAsCrawledCollectionNodes($doc, $articleNode, $article, $galleys) {
@@ -497,7 +510,7 @@ class ArticleMedraXmlFilter extends O4DOIXmlFilter {
 	 * Append the collection node 'Collection property="text-mining"' to the Article data node.
 	 * @param $doc DOMDocument
 	 * @param $articleNode DOMElement
-	 * @param $article Article
+	 * @param $article Submission
 	 * @param $galleys array of galleys
 	 */
 	function appendTextMiningCollectionNodes($doc, $articleNode, $article, $galleys) {
@@ -523,7 +536,7 @@ class ArticleMedraXmlFilter extends O4DOIXmlFilter {
 	 * Append the CitationList node with unstructured citations to the ContentItem data node.
 	 * @param $doc DOMDocument
 	 * @param $contentItemNode DOMElement
-	 * @param $article Article
+	 * @param $article Submission
 	 * @param $parsedCitations array of Citations
 	 */
 	function appendCitationListNodes($doc, $contentItemNode, $article, $parsedCitations) {

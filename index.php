@@ -13,12 +13,9 @@
  *
  * @ingroup plugins_importexport_medra
  *
- * @brief Wrapper for the mEDRA export plugin.
+ * @brief Wrapper for the mEDRA plugin.
  */
 
-
-require_once('MedraExportPlugin.inc.php');
-
-return new MedraExportPlugin();
+return new \APP\plugins\generic\medra\MedraPlugin();
 
 

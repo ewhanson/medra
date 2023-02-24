@@ -4,7 +4,7 @@
  */
 
 /**
- * @file plugins/importexport/medra/MedraExportDeployment.inc.php
+ * @file plugins/importexport/medra/MedraExportDeployment.php
  *
  * Copyright (c) 2014-2023 Simon Fraser University
  * Copyright (c) 2000-2023 John Willinsky
@@ -16,6 +16,14 @@
  * @brief Base class configuring the medra export process to an
  * application's specifics.
  */
+
+namespace APP\plugins\generic\medra;
+
+use APP\plugins\DOIPubIdExportPlugin;
+use APP\plugins\PubObjectCache;
+use PKP\context\Context;
+use PKP\plugins\ImportExportPlugin;
+use PKP\plugins\Plugin;
 
 // XML attributes
 define('MEDRA_XMLNS' , 'http://www.editeur.org/onix/DOIMetadata/2.0');

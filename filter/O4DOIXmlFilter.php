@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @file plugins/importexport/medra/filter/O4DOIXmlFilter.inc.php
+ * @file plugins/importexport/medra/filter/O4DOIXmlFilter.php
  *
  * Copyright (c) 2014-2023 Simon Fraser University
  * Copyright (c) 2000-2023 John Willinsky
@@ -13,7 +13,21 @@
  * @brief Basis class for converting objects (issues, articles, galleys) to a O4DOI XML document.
  */
 
+namespace APP\plugins\generic\medra\filter;
+
 // Notification types
+use APP\core\Application;
+use APP\i18n\AppLocale;
+use APP\plugins\DOIPubIdExportPlugin;
+use APP\submission\Submission;
+use DOMDocument;
+use DOMElement;
+use PKP\context\Context;
+use PKP\core\PKPString;
+use PKP\filter\FilterGroup;
+use PKP\galley\Galley;
+use PKP\plugins\importexport\native\filter\NativeExportFilter;
+
 define('O4DOI_NOTIFICATION_TYPE_NEW', '06');
 define('O4DOI_NOTIFICATION_TYPE_UPDATE', '07');
 
@@ -79,8 +93,6 @@ define('O4DOI_RELATION_IS_A_LANGUAGE_VERSION_OF', '85');
 define('O4DOI_RELATION_IS_MANIFESTED_IN', '89');
 define('O4DOI_RELATION_IS_A_MANIFESTATION_OF', '90');
 
-
-import('lib.pkp.plugins.importexport.native.filter.NativeExportFilter');
 
 
 class O4DOIXmlFilter extends NativeExportFilter {
@@ -442,7 +454,7 @@ class O4DOIXmlFilter extends NativeExportFilter {
 	 * Identify the locale precedence for this export.
 	 * @param $context Context
 	 * @param $article Submission
-	 * @param $galley ArticleGalley
+	 * @param $galley Galley
 	 * @return array A list of valid PKP locales in descending
 	 *  order of priority.
 	 */

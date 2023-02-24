@@ -13,8 +13,14 @@
  * @brief Scheduled task to send deposits to mEDRA.
  */
 
-import('lib.pkp.classes.scheduledTask.ScheduledTask');
+namespace APP\plugins\generic\medra;
 
+use APP\core\Application;
+use APP\journal\Journal;
+use APP\journal\JournalDAO;
+use PKP\file\FileManager;
+use PKP\plugins\PluginRegistry;
+use PKP\scheduledTask\ScheduledTask;
 
 class MedraInfoSender extends ScheduledTask {
 	/** @var $_plugin MedraExportPlugin */

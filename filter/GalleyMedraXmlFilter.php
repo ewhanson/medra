@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @file plugins/importexport/medra/filter/GalleyMedraXmlFilter.inc.php
+ * @file plugins/importexport/medra/filter/GalleyMedraXmlFilter.php
  *
  * Copyright (c) 2014-2023 Simon Fraser University
  * Copyright (c) 2000-2023 John Willinsky
@@ -13,8 +13,9 @@
  * @brief Class that converts an ArticleGalley i.e article as manifestation to a O4DOI XML document.
  */
 
-import('plugins.importexport.medra.filter.ArticleMedraXmlFilter');
+namespace APP\plugins\generic\medra\filter;
 
+use PKP\filter\FilterGroup;
 
 class GalleyMedraXmlFilter extends ArticleMedraXmlFilter {
 	/**

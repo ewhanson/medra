@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @file plugins/importexport/medra/MedraExportPlugin.inc.php
+ * @file plugins/importexport/medra/MedraExportPlugin.php
  *
  * Copyright (c) 2014-2023 Simon Fraser University
  * Copyright (c) 2003-2023 John Willinsky
@@ -13,13 +13,20 @@
  * @brief mEDRA Onix for DOI (O4DOI) export/registration plugin.
  */
 
-import('classes.plugins.DOIPubIdExportPlugin');
+namespace APP\plugins\generic\medra;
+
+use APP\i18n\AppLocale;
+use APP\plugins\DOIPubIdExportPlugin;
+use APP\plugins\generic\medra\classes\MedraWebservice;
+use APP\template\TemplateManager;
+use DOMDocument;
 
 // O4DOI schemas.
 define('O4DOI_ISSUE_AS_WORK', 0x01);
 define('O4DOI_ISSUE_AS_MANIFESTATION', 0x02);
 define('O4DOI_ARTICLE_AS_WORK', 0x03);
 define('O4DOI_ARTICLE_AS_MANIFESTATION', 0x04);
+
 
 class MedraExportPlugin extends DOIPubIdExportPlugin {
 

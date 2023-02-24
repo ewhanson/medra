@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @file plugins/importexport/medra/classes/form/MedraSettingsForm.inc.php
+ * @file plugins/importexport/medra/classes/form/MedraSettingsForm.php
  *
  * Copyright (c) 2014-2023 Simon Fraser University
  * Copyright (c) 2003-2023 John Willinsky
@@ -13,7 +13,16 @@
  * @brief Form for journal managers to setup the mEDRA plug-in.
  */
 
-import('lib.pkp.classes.form.Form');
+namespace APP\plugins\generic\medra\classes\form;
+
+use APP\plugins\generic\medra\MedraExportPlugin;
+use APP\template\TemplateManager;
+use PKP\form\Form;
+use PKP\form\validation\FormValidator;
+use PKP\form\validation\FormValidatorEmail;
+use PKP\form\validation\FormValidatorInSet;
+use PKP\form\validation\FormValidatorPost;
+use PKP\form\validation\FormValidatorRegExp;
 
 class MedraSettingsForm extends Form {
 

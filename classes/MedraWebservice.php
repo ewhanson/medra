@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @file plugins/importexport/medra/classes/MedraWebservice.inc.php
+ * @file plugins/importexport/medra/classes/MedraWebservice.php
  *
  * Copyright (c) 2014-2023 Simon Fraser University
  * Copyright (c) 2003-2023 John Willinsky
@@ -16,7 +16,12 @@
  * it doesn't support multipart SOAP messages.
  */
 
-import('lib.pkp.classes.xml.XMLNode');
+namespace APP\plugins\generic\medra\classes;
+
+use APP\core\Application;
+use DOMDocument;
+use PKP\core\PKPString;
+use PKP\xml\XMLNode;
 
 define('MEDRA_WS_ENDPOINT_DEV', 'https://www-medra-dev.medra.org/servlet/ws/medraWS');
 define('MEDRA2CR_WS_ENDPOINT_DEV', 'https://www-medra-dev.medra.org/servlet/ws/CRProxy');
@@ -136,7 +141,7 @@ class MedraWebservice {
 				],
 				'body' => $request,
 			]);
-		} catch (GuzzleHttp\Exception\RequestException $e) {
+		} catch (\GuzzleHttp\Exception\RequestException $e) {
 			$result = $e->getMessage();
 			if ($e->hasResponse()) {
 				$exceptionResponseContent = $e->getResponse()->getBody()->getContents();

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @file plugins/importexport/medra/filter/IssueMedraXmlFilter.inc.php
+ * @file plugins/importexport/medra/filter/IssueMedraXmlFilter.php
  *
  * Copyright (c) 2014-2023 Simon Fraser University
  * Copyright (c) 2000-2023 John Willinsky
@@ -13,8 +13,17 @@
  * @brief Class that converts an Issue as work or manifestation to a O4DOI XML document.
  */
 
-import('plugins.importexport.medra.filter.O4DOIXmlFilter');
+namespace APP\plugins\generic\medra\filter;
 
+use APP\core\Application;
+use APP\core\Services;
+use APP\issue\Issue;
+use APP\issue\IssueGalleyDAO;
+use DOMDocument;
+use DOMElement;
+use PKP\core\PKPString;
+use PKP\db\DAORegistry;
+use PKP\filter\FilterGroup;
 
 class IssueMedraXmlFilter extends O4DOIXmlFilter {
 	/**
